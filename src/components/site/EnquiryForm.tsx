@@ -5,15 +5,15 @@ export function EnquiryForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [values, setValues] = useState({ name: "", mobile: "", need: "", message: "" });
 
-  const set = (k: string, v: string) => setValues((s) => ({ ...s, [k]: v }));
+  const set = (k: keyof typeof values, v: string) => setValues((s) => ({ ...s, [k]: v }));
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     const next: Record<string, string> = {};
-    if (!values.name.trim()) next.name = "Please enter your name.";
-    if (!/^[0-9+\s-]{10,15}$/.test(values.mobile.trim()))
-      next.mobile = "Please enter a valid mobile number.";
-    if (!values.need) next.need = "Please choose what you need.";
+    if (!values["name"].trim()) next["name"] = "Please enter your name.";
+    if (!/^[0-9+\s-]{10,15}$/.test(values["mobile"].trim()))
+      next["mobile"] = "Please enter a valid mobile number.";
+    if (!values["need"]) next["need"] = "Please choose what you need.";
     setErrors(next);
     if (Object.keys(next).length === 0) setSent(true);
   };
@@ -32,11 +32,11 @@ export function EnquiryForm() {
           <input
             id="name"
             className={`${field} mt-2`}
-            value={values.name}
+            value={values["name"]}
             onChange={(e) => set("name", e.target.value)}
             placeholder="Your name"
           />
-          {errors.name && <p className="mt-1 text-sm text-ember">{errors.name}</p>}
+          {errors["name"] && <p className="mt-1 text-sm text-ember">{errors["name"]}</p>}
         </div>
         <div>
           <label htmlFor="mobile" className="eyebrow text-ink/60">
@@ -46,11 +46,11 @@ export function EnquiryForm() {
             id="mobile"
             inputMode="tel"
             className={`${field} mt-2`}
-            value={values.mobile}
+            value={values["mobile"]}
             onChange={(e) => set("mobile", e.target.value)}
             placeholder="10-digit mobile number"
           />
-          {errors.mobile && <p className="mt-1 text-sm text-ember">{errors.mobile}</p>}
+          {errors["mobile"] && <p className="mt-1 text-sm text-ember">{errors["mobile"]}</p>}
         </div>
         <div>
           <label htmlFor="need" className="eyebrow text-ink/60">
@@ -59,7 +59,7 @@ export function EnquiryForm() {
           <select
             id="need"
             className={`${field} mt-2`}
-            value={values.need}
+            value={values["need"]}
             onChange={(e) => set("need", e.target.value)}
           >
             <option value="">Select an option</option>
@@ -68,7 +68,7 @@ export function EnquiryForm() {
             <option>Accounts, GST &amp; Registration</option>
             <option>Not sure yet</option>
           </select>
-          {errors.need && <p className="mt-1 text-sm text-ember">{errors.need}</p>}
+          {errors["need"] && <p className="mt-1 text-sm text-ember">{errors["need"]}</p>}
         </div>
         <div>
           <label htmlFor="message" className="eyebrow text-ink/60">
@@ -78,7 +78,7 @@ export function EnquiryForm() {
             id="message"
             rows={4}
             className={`${field} mt-2`}
-            value={values.message}
+            value={values["message"]}
             onChange={(e) => set("message", e.target.value)}
             placeholder="Tell us briefly what you're looking for."
           />
