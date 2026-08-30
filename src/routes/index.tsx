@@ -5,6 +5,7 @@ import { Services } from "@/components/site/Services";
 import { EnquiryForm } from "@/components/site/EnquiryForm";
 import { PhoenixMark } from "@/components/site/PhoenixMark";
 import { Reveal } from "@/components/site/Reveal";
+import phoenixSymbolAsset from "@/assets/phoenix-symbol.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -154,7 +155,11 @@ function Index() {
 
           <div className="flex justify-center lg:justify-end">
             <div data-animate style={{ animation: "flame-float 6s ease-in-out infinite" }}>
-              <PhoenixMark id="hero" animated className="h-64 w-64 md:h-[22rem] md:w-[22rem]" />
+              <img
+                src={phoenixSymbolAsset.url}
+                alt="Phoenix India symbol"
+                className="h-64 w-auto md:h-[22rem]"
+              />
             </div>
           </div>
         </div>
