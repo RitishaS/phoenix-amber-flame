@@ -5,6 +5,7 @@ import { Services } from "@/components/site/Services";
 import { EnquiryForm } from "@/components/site/EnquiryForm";
 import { PhoenixMark } from "@/components/site/PhoenixMark";
 import { Reveal } from "@/components/site/Reveal";
+import phoenixSymbolAsset from "@/assets/phoenix-symbol.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
