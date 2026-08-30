@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
-import { PhoenixMark } from "./PhoenixMark";
+import logoAsset from "@/assets/phoenix-india-logo.jpeg.asset.json";
 
 const NAV = [
   { label: "Services", href: "#services" },
@@ -30,9 +30,12 @@ export function Header() {
       }`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
-        <a href="#top" className="flex items-center gap-2.5 text-on-dark">
-          <PhoenixMark id="hdr" className="h-9 w-9" />
-          <span className="font-display text-lg font-semibold tracking-tight">Phoenix India</span>
+        <a href="#top" className="flex items-center text-on-dark">
+          <img
+            src={logoAsset.url}
+            alt="Phoenix India"
+            className="h-9 w-auto object-contain"
+          />
         </a>
 
         <nav className="hidden items-center gap-7 md:flex">
