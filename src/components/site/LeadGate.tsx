@@ -14,7 +14,6 @@ type Target = { destination: string; source: string };
 // Module-level store so consumers never depend on React context identity
 // (avoids "must be used inside provider" crashes across HMR / duplicate modules).
 let listener: ((t: Target | null) => void) | null = null;
-let providerMounted = false;
 
 function openGate(destination: string, source: string) {
   if (listener) listener({ destination, source });
@@ -36,10 +35,8 @@ export function LeadGateProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     listener = setTarget;
-    providerMounted = true;
     return () => {
       listener = null;
-      providerMounted = false;
     };
   }, []);
 
