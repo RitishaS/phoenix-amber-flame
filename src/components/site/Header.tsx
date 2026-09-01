@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
-import logoAsset from "@/assets/phoenix-india-logo-transparent.png.asset.json";
+
 
 const NAV = [
   { label: "Services", href: "#services" },
