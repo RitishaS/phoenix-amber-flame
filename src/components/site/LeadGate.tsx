@@ -77,7 +77,7 @@ export function LeadGateProvider({ children }: { children: ReactNode }) {
   }, [target, close]);
 
   return (
-    <LeadGateContext.Provider value={{ open }}>
+    <>
       {children}
       {target && (
         <LeadGateModal
@@ -86,8 +86,9 @@ export function LeadGateProvider({ children }: { children: ReactNode }) {
           onDone={() => go(target.destination)}
         />
       )}
-    </LeadGateContext.Provider>
+    </>
   );
+
 }
 
 function LeadGateModal({
