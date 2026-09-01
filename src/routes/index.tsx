@@ -5,6 +5,7 @@ import { Services } from "@/components/site/Services";
 import { EnquiryForm } from "@/components/site/EnquiryForm";
 import { PhoenixMark } from "@/components/site/PhoenixMark";
 import { Reveal } from "@/components/site/Reveal";
+import { LeadGateProvider, GateLink } from "@/components/site/LeadGate";
 import phoenixSymbolAsset from "@/assets/phoenix-symbol.png.asset.json";
 
 export const Route = createFileRoute("/")({
@@ -87,6 +88,7 @@ function EmberRule() {
 
 function Index() {
   return (
+    <LeadGateProvider>
     <div id="top" className="bg-paper-2">
       <Header />
 
@@ -133,12 +135,12 @@ function Index() {
             </Reveal>
             <Reveal delay={200}>
               <div className="mt-8 flex flex-wrap gap-3">
-                <a href="#contact" className="btn-flame">
+                <GateLink href="#contact" className="btn-flame">
                   Talk to Phoenix India
-                </a>
-                <a href="#services" className="btn-ghost-light">
+                </GateLink>
+                <GateLink href="#services" className="btn-ghost-light">
                   See what we cover
-                </a>
+                </GateLink>
               </div>
             </Reveal>
             <Reveal delay={260}>
@@ -384,5 +386,6 @@ function Index() {
         </div>
       </footer>
     </div>
+    </LeadGateProvider>
   );
 }
