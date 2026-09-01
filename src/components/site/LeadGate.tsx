@@ -1,12 +1,11 @@
 import {
-  createContext,
   useCallback,
-  useContext,
   useEffect,
   useState,
   type FormEvent,
   type ReactNode,
 } from "react";
+
 import { X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
