@@ -10,26 +10,42 @@ import {
 import { X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
-type GateCtx = { open: (destination: string, source: string) => void };
+type Target = { destination: string; source: string };
 
-const LeadGateContext = createContext<GateCtx | null>(null);
+// Module-level store so consumers never depend on React context identity
+// (avoids "must be used inside provider" crashes across HMR / duplicate modules).
+let listener: ((t: Target | null) => void) | null = null;
+let providerMounted = false;
+
+function openGate(destination: string, source: string) {
+  if (listener) listener({ destination, source });
+  else if (destination.startsWith("#")) {
+    document.querySelector(destination)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  } else {
+    window.location.href = destination;
+  }
+}
 
 export function useLeadGate() {
-  const ctx = useContext(LeadGateContext);
-  if (!ctx) throw new Error("useLeadGate must be used inside LeadGateProvider");
-  return ctx;
+  return { open: openGate };
 }
 
 const SERVICES = ["Insurance", "Loan", "Account/Banking", "Not sure yet"];
 
 export function LeadGateProvider({ children }: { children: ReactNode }) {
-  const [target, setTarget] = useState<{ destination: string; source: string } | null>(null);
+  const [target, setTarget] = useState<Target | null>(null);
 
-  const open = useCallback((destination: string, source: string) => {
-    setTarget({ destination, source });
+  useEffect(() => {
+    listener = setTarget;
+    providerMounted = true;
+    return () => {
+      listener = null;
+      providerMounted = false;
+    };
   }, []);
 
   const close = useCallback(() => setTarget(null), []);
+
 
   const go = useCallback(
     (destination: string) => {
