@@ -88,6 +88,7 @@ function EmberRule() {
 
 function Index() {
   return (
+    <LeadGateProvider>
     <div id="top" className="bg-paper-2">
       <Header />
 
@@ -385,5 +386,6 @@ function Index() {
         </div>
       </footer>
     </div>
+    </LeadGateProvider>
   );
 }

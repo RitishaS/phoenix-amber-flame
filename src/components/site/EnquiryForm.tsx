@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 export function EnquiryForm() {
   const [sent, setSent] = useState(false);
@@ -7,7 +8,7 @@ export function EnquiryForm() {
 
   const set = (k: keyof typeof values, v: string) => setValues((s) => ({ ...s, [k]: v }));
 
-  const onSubmit = (e: FormEvent) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const next: Record<string, string> = {};
     if (!values["name"].trim()) next["name"] = "Please enter your name.";
@@ -15,7 +16,19 @@ export function EnquiryForm() {
       next["mobile"] = "Please enter a valid mobile number.";
     if (!values["need"]) next["need"] = "Please choose what you need.";
     setErrors(next);
-    if (Object.keys(next).length === 0) setSent(true);
+    if (Object.keys(next).length > 0) return;
+    const { error } = await supabase.from("enquiries").insert({
+      name: values["name"].trim(),
+      phone: values["mobile"].trim(),
+      service_type: values["need"],
+      message: values["message"].trim() || null,
+      source: "contact-section",
+    });
+    if (error) {
+      setErrors({ form: "Could not send right now. Please call 0251-6571888." });
+      return;
+    }
+    setSent(true);
   };
 
   const field =
@@ -98,9 +111,14 @@ export function EnquiryForm() {
           </p>
         )}
 
+        {errors["form"] && (
+          <p role="alert" className="text-sm text-ember">
+            {errors["form"]}
+          </p>
+        )}
+
         <p className="font-mono text-[0.7rem] leading-relaxed text-ink/50">
-          Note: this form is client-side only for now — it should be connected to email or WhatsApp
-          later.
+          Note: enquiries are stored securely — email or WhatsApp forwarding can be connected later.
         </p>
       </form>
     </div>
