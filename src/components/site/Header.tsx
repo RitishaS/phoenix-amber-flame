@@ -31,11 +31,7 @@ export function Header() {
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
         <a href="#top" className="flex items-center text-on-dark">
-          <img
-            src={logoAsset.url}
-            alt="Phoenix India"
-            className="h-12 w-auto object-contain"
-          />
+          <span className="font-display text-lg font-semibold">Phoenix India</span>
         </a>
 
         <nav className="hidden items-center gap-7 md:flex">
