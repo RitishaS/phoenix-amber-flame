@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Menu, X, Phone } from "lucide-react";
+import { GateLink } from "@/components/site/LeadGate";
 
 
 const NAV = [
@@ -32,13 +33,13 @@ export function Header() {
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
         <nav className="hidden items-center gap-7 md:flex">
           {NAV.map((n) => (
-            <a
+            <GateLink
               key={n.href}
               href={n.href}
-              className="text-sm text-on-dark-muted transition-colors hover:text-flame-2"
+              className="rounded-sm text-sm text-on-dark-muted transition-colors hover:text-flame-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-flame-2"
             >
               {n.label}
-            </a>
+            </GateLink>
           ))}
         </nav>
 
@@ -49,9 +50,9 @@ export function Header() {
           >
             <Phone className="h-3.5 w-3.5" /> 0251-6571888
           </a>
-          <a href="#contact" className="btn-flame px-5 py-2 text-sm">
+          <GateLink href="#contact" className="btn-flame px-5 py-2 text-sm">
             Get a Quote
-          </a>
+          </GateLink>
         </div>
 
         <button
@@ -69,23 +70,23 @@ export function Header() {
         <div className="border-t border-white/10 bg-ink/95 px-5 pb-5 pt-3 md:hidden">
           <nav className="flex flex-col">
             {NAV.map((n) => (
-              <a
+              <GateLink
                 key={n.href}
                 href={n.href}
-                onClick={() => setOpen(false)}
+                onNavigate={() => setOpen(false)}
                 className="border-b border-white/5 py-3 text-on-dark-muted hover:text-flame-2"
               >
                 {n.label}
-              </a>
+              </GateLink>
             ))}
           </nav>
           <div className="mt-4 flex flex-col gap-3">
             <a href="tel:02516571888" className="font-mono text-xs text-on-dark-muted">
               0251-6571888
             </a>
-            <a href="#contact" onClick={() => setOpen(false)} className="btn-flame">
+            <GateLink href="#contact" onNavigate={() => setOpen(false)} className="btn-flame">
               Get a Quote
-            </a>
+            </GateLink>
           </div>
         </div>
       )}
