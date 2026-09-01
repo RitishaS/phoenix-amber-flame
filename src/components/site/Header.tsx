@@ -30,10 +30,6 @@ export function Header() {
       }`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
-        <a href="#top" className="flex items-center text-on-dark">
-          <span className="font-display text-lg font-semibold">Phoenix India</span>
-        </a>
-
         <nav className="hidden items-center gap-7 md:flex">
           {NAV.map((n) => (
             <a
