@@ -3,6 +3,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { submitEnquiry } from "@/lib/enquiries.functions";
 
 export function EnquiryForm() {
+  const send = useServerFn(submitEnquiry);
   const [sent, setSent] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [values, setValues] = useState({ name: "", mobile: "", need: "", message: "" });
