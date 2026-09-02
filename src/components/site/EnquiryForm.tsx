@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { useServerFn } from "@tanstack/react-start";
+import { submitEnquiry } from "@/lib/enquiries.functions";
 
 export function EnquiryForm() {
   const [sent, setSent] = useState(false);
