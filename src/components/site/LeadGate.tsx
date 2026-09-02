@@ -104,6 +104,7 @@ function LeadGateModal({
     service: "",
     message: "",
   });
+  const send = useServerFn(submitEnquiry);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [saving, setSaving] = useState(false);
   const [done, setDone] = useState(false);
