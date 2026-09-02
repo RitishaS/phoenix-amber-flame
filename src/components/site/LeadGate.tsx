@@ -7,8 +7,7 @@ import {
 } from "react";
 
 import { X } from "lucide-react";
-import { useServerFn } from "@tanstack/react-start";
-import { submitEnquiry } from "@/lib/enquiries.functions";
+import { supabase } from "@/integrations/supabase/client";
 
 type Target = { destination: string; source: string };
 
