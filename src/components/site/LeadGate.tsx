@@ -127,19 +127,23 @@ function LeadGateModal({
     if (Object.keys(next).length > 0) return;
 
     setSaving(true);
-    const { error } = await supabase.from("enquiries").insert({
-      name: values.name.trim(),
-      phone: values.phone.trim(),
-      email: values.email.trim() || null,
-      service_type: values.service,
-      message: values.message.trim() || null,
-      source,
-    });
-    setSaving(false);
-    if (error) {
+    try {
+      await send({
+        data: {
+          name: values.name.trim(),
+          phone: values.phone.trim(),
+          email: values.email.trim() || null,
+          service_type: values.service,
+          message: values.message.trim() || null,
+          source,
+        },
+      });
+    } catch {
+      setSaving(false);
       setErrors({ form: "Could not send right now. Please try again or call 0251-6571888." });
       return;
     }
+    setSaving(false);
     setDone(true);
     setTimeout(onDone, 900);
   };
