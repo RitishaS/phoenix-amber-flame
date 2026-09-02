@@ -1,7 +1,9 @@
 import { useState, type FormEvent } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import { useServerFn } from "@tanstack/react-start";
+import { submitEnquiry } from "@/lib/enquiries.functions";
 
 export function EnquiryForm() {
+  const send = useServerFn(submitEnquiry);
   const [sent, setSent] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [values, setValues] = useState({ name: "", mobile: "", need: "", message: "" });
@@ -17,14 +19,17 @@ export function EnquiryForm() {
     if (!values["need"]) next["need"] = "Please choose what you need.";
     setErrors(next);
     if (Object.keys(next).length > 0) return;
-    const { error } = await supabase.from("enquiries").insert({
-      name: values["name"].trim(),
-      phone: values["mobile"].trim(),
-      service_type: values["need"],
-      message: values["message"].trim() || null,
-      source: "contact-section",
-    });
-    if (error) {
+    try {
+      await send({
+        data: {
+          name: values["name"].trim(),
+          phone: values["mobile"].trim(),
+          service_type: values["need"],
+          message: values["message"].trim() || null,
+          source: "contact-section",
+        },
+      });
+    } catch {
       setErrors({ form: "Could not send right now. Please call 0251-6571888." });
       return;
     }
