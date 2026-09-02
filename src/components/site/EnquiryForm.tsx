@@ -17,17 +17,14 @@ export function EnquiryForm() {
     if (!values["need"]) next["need"] = "Please choose what you need.";
     setErrors(next);
     if (Object.keys(next).length > 0) return;
-    try {
-      await send({
-        data: {
-          name: values["name"].trim(),
-          phone: values["mobile"].trim(),
-          service_type: values["need"],
-          message: values["message"].trim() || null,
-          source: "contact-section",
-        },
-      });
-    } catch {
+    const { error } = await supabase.from("enquiries").insert({
+      name: values["name"].trim(),
+      phone: values["mobile"].trim(),
+      service_type: values["need"],
+      message: values["message"].trim() || null,
+      source: "contact-section",
+    });
+    if (error) {
       setErrors({ form: "Could not send right now. Please call 0251-6571888." });
       return;
     }
