@@ -7,8 +7,7 @@ import {
 } from "react";
 
 import { X } from "lucide-react";
-import { useServerFn } from "@tanstack/react-start";
-import { submitEnquiry } from "@/lib/enquiries.functions";
+import { supabase } from "@/integrations/supabase/client";
 
 type Target = { destination: string; source: string };
 
@@ -104,7 +103,6 @@ function LeadGateModal({
     service: "",
     message: "",
   });
-  const send = useServerFn(submitEnquiry);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [saving, setSaving] = useState(false);
   const [done, setDone] = useState(false);
@@ -127,23 +125,19 @@ function LeadGateModal({
     if (Object.keys(next).length > 0) return;
 
     setSaving(true);
-    try {
-      await send({
-        data: {
-          name: values.name.trim(),
-          phone: values.phone.trim(),
-          email: values.email.trim() || null,
-          service_type: values.service,
-          message: values.message.trim() || null,
-          source,
-        },
-      });
-    } catch {
-      setSaving(false);
+    const { error } = await supabase.from("enquiries").insert({
+      name: values.name.trim(),
+      phone: values.phone.trim(),
+      email: values.email.trim() || null,
+      service_type: values.service,
+      message: values.message.trim() || null,
+      source,
+    });
+    setSaving(false);
+    if (error) {
       setErrors({ form: "Could not send right now. Please try again or call 0251-6571888." });
       return;
     }
-    setSaving(false);
     setDone(true);
     setTimeout(onDone, 900);
   };
