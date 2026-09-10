@@ -3,7 +3,7 @@ import { MapPin, Globe } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Services } from "@/components/site/Services";
 import { EnquiryForm } from "@/components/site/EnquiryForm";
-import { PhoenixMark } from "@/components/site/PhoenixMark";
+
 import { Reveal } from "@/components/site/Reveal";
 import { LeadGateProvider, GateLink } from "@/components/site/LeadGate";
 import phoenixSymbolAsset from "@/assets/phoenix-symbol.png.asset.json";
