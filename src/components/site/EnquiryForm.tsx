@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 export function EnquiryForm() {
   const [sent, setSent] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [values, setValues] = useState({ name: "", mobile: "", need: "", message: "" });
+  const [values, setValues] = useState({ name: "", need: "", message: "" });
 
   const set = (k: keyof typeof values, v: string) => setValues((s) => ({ ...s, [k]: v }));
 
