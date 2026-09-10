@@ -98,7 +98,6 @@ function LeadGateModal({
 }) {
   const [values, setValues] = useState({
     name: "",
-    phone: "",
     email: "",
     service: "",
     message: "",
