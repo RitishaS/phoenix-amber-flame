@@ -1,0 +1,1 @@
+ALTER TABLE public.enquiries ALTER COLUMN phone DROP NOT NULL;
