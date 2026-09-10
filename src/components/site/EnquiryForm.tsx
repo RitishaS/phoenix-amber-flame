@@ -49,20 +49,6 @@ export function EnquiryForm() {
           {errors["name"] && <p className="mt-1 text-sm text-ember">{errors["name"]}</p>}
         </div>
         <div>
-          <label htmlFor="mobile" className="eyebrow text-ink/60">
-            Mobile number
-          </label>
-          <input
-            id="mobile"
-            inputMode="tel"
-            className={`${field} mt-2`}
-            value={values["mobile"]}
-            onChange={(e) => set("mobile", e.target.value)}
-            placeholder="10-digit mobile number"
-          />
-          {errors["mobile"] && <p className="mt-1 text-sm text-ember">{errors["mobile"]}</p>}
-        </div>
-        <div>
           <label htmlFor="need" className="eyebrow text-ink/60">
             What do you need?
           </label>
