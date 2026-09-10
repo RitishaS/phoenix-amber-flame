@@ -98,7 +98,6 @@ function LeadGateModal({
 }) {
   const [values, setValues] = useState({
     name: "",
-    phone: "",
     email: "",
     service: "",
     message: "",
@@ -116,8 +115,6 @@ function LeadGateModal({
     e.preventDefault();
     const next: Record<string, string> = {};
     if (!values.name.trim()) next["name"] = "Please enter your name.";
-    if (!/^[0-9+\s-]{10,15}$/.test(values.phone.trim()))
-      next["phone"] = "Please enter a valid phone number.";
     if (values.email.trim() && !/^\S+@\S+\.\S+$/.test(values.email.trim()))
       next["email"] = "Please enter a valid email address.";
     if (!values.service) next["service"] = "Please choose a service type.";
@@ -127,7 +124,6 @@ function LeadGateModal({
     setSaving(true);
     const { error } = await supabase.from("enquiries").insert({
       name: values.name.trim(),
-      phone: values.phone.trim(),
       email: values.email.trim() || null,
       service_type: values.service,
       message: values.message.trim() || null,
@@ -181,21 +177,6 @@ function LeadGateModal({
               placeholder="Your name"
             />
             {errors["name"] && <p className="mt-1 text-sm text-ember">{errors["name"]}</p>}
-          </div>
-
-          <div>
-            <label htmlFor="gate-phone" className="eyebrow text-ink/60">
-              Phone number *
-            </label>
-            <input
-              id="gate-phone"
-              inputMode="tel"
-              className={`${field} mt-2`}
-              value={values.phone}
-              onChange={(e) => set("phone", e.target.value)}
-              placeholder="10-digit mobile number"
-            />
-            {errors["phone"] && <p className="mt-1 text-sm text-ember">{errors["phone"]}</p>}
           </div>
 
           <div>

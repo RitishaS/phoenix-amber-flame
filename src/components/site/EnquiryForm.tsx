@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 export function EnquiryForm() {
   const [sent, setSent] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [values, setValues] = useState({ name: "", mobile: "", need: "", message: "" });
+  const [values, setValues] = useState({ name: "", need: "", message: "" });
 
   const set = (k: keyof typeof values, v: string) => setValues((s) => ({ ...s, [k]: v }));
 
@@ -12,14 +12,11 @@ export function EnquiryForm() {
     e.preventDefault();
     const next: Record<string, string> = {};
     if (!values["name"].trim()) next["name"] = "Please enter your name.";
-    if (!/^[0-9+\s-]{10,15}$/.test(values["mobile"].trim()))
-      next["mobile"] = "Please enter a valid mobile number.";
     if (!values["need"]) next["need"] = "Please choose what you need.";
     setErrors(next);
     if (Object.keys(next).length > 0) return;
     const { error } = await supabase.from("enquiries").insert({
       name: values["name"].trim(),
-      phone: values["mobile"].trim(),
       service_type: values["need"],
       message: values["message"].trim() || null,
       source: "contact-section",
@@ -50,20 +47,6 @@ export function EnquiryForm() {
             placeholder="Your name"
           />
           {errors["name"] && <p className="mt-1 text-sm text-ember">{errors["name"]}</p>}
-        </div>
-        <div>
-          <label htmlFor="mobile" className="eyebrow text-ink/60">
-            Mobile number
-          </label>
-          <input
-            id="mobile"
-            inputMode="tel"
-            className={`${field} mt-2`}
-            value={values["mobile"]}
-            onChange={(e) => set("mobile", e.target.value)}
-            placeholder="10-digit mobile number"
-          />
-          {errors["mobile"] && <p className="mt-1 text-sm text-ember">{errors["mobile"]}</p>}
         </div>
         <div>
           <label htmlFor="need" className="eyebrow text-ink/60">
