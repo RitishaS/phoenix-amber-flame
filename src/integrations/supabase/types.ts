@@ -21,7 +21,7 @@ export type Database = {
           id: string
           message: string | null
           name: string | null
-          phone: string
+          phone: string | null
           service_type: string
           source: string | null
         }
@@ -31,7 +31,7 @@ export type Database = {
           id?: string
           message?: string | null
           name?: string | null
-          phone: string
+          phone?: string | null
           service_type: string
           source?: string | null
         }
@@ -41,7 +41,7 @@ export type Database = {
           id?: string
           message?: string | null
           name?: string | null
-          phone?: string
+          phone?: string | null
           service_type?: string
           source?: string | null
         }
