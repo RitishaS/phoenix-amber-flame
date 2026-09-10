@@ -180,21 +180,6 @@ function LeadGateModal({
           </div>
 
           <div>
-            <label htmlFor="gate-phone" className="eyebrow text-ink/60">
-              Phone number *
-            </label>
-            <input
-              id="gate-phone"
-              inputMode="tel"
-              className={`${field} mt-2`}
-              value={values.phone}
-              onChange={(e) => set("phone", e.target.value)}
-              placeholder="10-digit mobile number"
-            />
-            {errors["phone"] && <p className="mt-1 text-sm text-ember">{errors["phone"]}</p>}
-          </div>
-
-          <div>
             <label htmlFor="gate-email" className="eyebrow text-ink/60">
               Email (optional)
             </label>
