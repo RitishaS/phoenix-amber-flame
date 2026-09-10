@@ -1,7 +1,6 @@
 # Roadmap
 
 - [x] Lead popup + contact form save enquiries to the Lovable Cloud database
+- [x] Remove phone number — form fields, header, contact section, footer, messages
 - [ ] MongoDB Atlas: not reachable from the app's edge runtime (native driver won't bundle).
       Options: Atlas App Services HTTPS endpoint, or sync leads out of the Cloud DB.
-- [x] Remove phone number field from both enquiry forms and make the database column optional.
-
