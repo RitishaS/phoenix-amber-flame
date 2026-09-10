@@ -12,14 +12,11 @@ export function EnquiryForm() {
     e.preventDefault();
     const next: Record<string, string> = {};
     if (!values["name"].trim()) next["name"] = "Please enter your name.";
-    if (!/^[0-9+\s-]{10,15}$/.test(values["mobile"].trim()))
-      next["mobile"] = "Please enter a valid mobile number.";
     if (!values["need"]) next["need"] = "Please choose what you need.";
     setErrors(next);
     if (Object.keys(next).length > 0) return;
     const { error } = await supabase.from("enquiries").insert({
       name: values["name"].trim(),
-      phone: values["mobile"].trim(),
       service_type: values["need"],
       message: values["message"].trim() || null,
       source: "contact-section",
