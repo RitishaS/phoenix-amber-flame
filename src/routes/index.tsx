@@ -3,7 +3,7 @@ import { MapPin, Globe } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Services } from "@/components/site/Services";
 import { EnquiryForm } from "@/components/site/EnquiryForm";
-import { PhoenixMark } from "@/components/site/PhoenixMark";
+
 import { Reveal } from "@/components/site/Reveal";
 import { LeadGateProvider, GateLink } from "@/components/site/LeadGate";
 import phoenixSymbolAsset from "@/assets/phoenix-symbol.png.asset.json";
@@ -337,7 +337,11 @@ function Index() {
           <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
             <div>
               <div className="flex items-center gap-2.5">
-                <PhoenixMark id="ftr" className="h-9 w-9" />
+                <img
+                  src={phoenixSymbolAsset.url}
+                  alt="Phoenix India symbol"
+                  className="h-10 w-auto object-contain"
+                />
                 <span className="font-display text-lg font-semibold">Phoenix India</span>
               </div>
               <p className="mt-4 max-w-xs text-sm leading-relaxed text-on-dark-muted">
