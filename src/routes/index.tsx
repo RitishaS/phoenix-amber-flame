@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { MapPin, Phone, Globe } from "lucide-react";
+import { MapPin, Globe } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Services } from "@/components/site/Services";
 import { EnquiryForm } from "@/components/site/EnquiryForm";
@@ -21,7 +21,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Insurance, loans and accounts under one roof in Kalyan (W), Maharashtra. Corporate Agent since 2009. Call 0251-6571888.",
+          "Insurance, loans and accounts under one roof in Kalyan (W), Maharashtra. Corporate Agent since 2009.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -305,15 +305,7 @@ function Index() {
                   </div>
                 </li>
                 <li className="flex gap-4">
-                  <Phone className="mt-1 h-5 w-5 shrink-0 text-ember" />
-                  <div>
-                    <p className="eyebrow text-ink/50">Telephone</p>
-                    <a href="tel:02516571888" className="mt-1 block font-mono text-ink/85">
-                      0251-6571888
-                    </a>
-                  </div>
-                </li>
-                <li className="flex gap-4">
+
                   <Globe className="mt-1 h-5 w-5 shrink-0 text-ember" />
                   <div>
                     <p className="eyebrow text-ink/50">Website</p>
@@ -361,7 +353,7 @@ function Index() {
               },
               {
                 h: "Reach us",
-                links: [["0251-6571888", "tel:02516571888"], ["Enquiry form", "#contact"]],
+                links: [["Enquiry form", "#contact"], ["Office address", "#contact"]],
               },
             ].map((col) => (
               <div key={col.h}>

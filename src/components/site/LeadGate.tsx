@@ -131,7 +131,7 @@ function LeadGateModal({
     });
     setSaving(false);
     if (error) {
-      setErrors({ form: "Could not send right now. Please try again or call 0251-6571888." });
+      setErrors({ form: "Could not send right now. Please try again." });
       return;
     }
     setDone(true);

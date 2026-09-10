@@ -22,7 +22,7 @@ export function EnquiryForm() {
       source: "contact-section",
     });
     if (error) {
-      setErrors({ form: "Could not send right now. Please call 0251-6571888." });
+      setErrors({ form: "Could not send right now. Please try again." });
       return;
     }
     setSent(true);
@@ -89,8 +89,7 @@ export function EnquiryForm() {
             role="status"
             className="rounded-lg border border-ember/25 bg-ember/10 px-4 py-3 text-sm text-ember"
           >
-            Thank you — your enquiry has been noted. Please call 0251-6571888 for an immediate
-            response.
+            Thank you — your enquiry has been noted. We&apos;ll get back to you shortly.
           </p>
         )}
 

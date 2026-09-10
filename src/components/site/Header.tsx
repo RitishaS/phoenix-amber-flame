@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { GateLink } from "@/components/site/LeadGate";
 
 
@@ -44,12 +44,6 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-4 md:flex">
-          <a
-            href="tel:02516571888"
-            className="flex items-center gap-2 font-mono text-xs text-on-dark-muted hover:text-flame-2"
-          >
-            <Phone className="h-3.5 w-3.5" /> 0251-6571888
-          </a>
           <GateLink href="#contact" className="btn-flame px-5 py-2 text-sm">
             Get a Quote
           </GateLink>
@@ -81,9 +75,6 @@ export function Header() {
             ))}
           </nav>
           <div className="mt-4 flex flex-col gap-3">
-            <a href="tel:02516571888" className="font-mono text-xs text-on-dark-muted">
-              0251-6571888
-            </a>
             <GateLink href="#contact" onNavigate={() => setOpen(false)} className="btn-flame">
               Get a Quote
             </GateLink>
