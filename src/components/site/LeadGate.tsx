@@ -115,8 +115,6 @@ function LeadGateModal({
     e.preventDefault();
     const next: Record<string, string> = {};
     if (!values.name.trim()) next["name"] = "Please enter your name.";
-    if (!/^[0-9+\s-]{10,15}$/.test(values.phone.trim()))
-      next["phone"] = "Please enter a valid phone number.";
     if (values.email.trim() && !/^\S+@\S+\.\S+$/.test(values.email.trim()))
       next["email"] = "Please enter a valid email address.";
     if (!values.service) next["service"] = "Please choose a service type.";
@@ -126,7 +124,6 @@ function LeadGateModal({
     setSaving(true);
     const { error } = await supabase.from("enquiries").insert({
       name: values.name.trim(),
-      phone: values.phone.trim(),
       email: values.email.trim() || null,
       service_type: values.service,
       message: values.message.trim() || null,
