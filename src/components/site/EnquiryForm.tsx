@@ -1,6 +1,20 @@
 import { useState, type FormEvent } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
+const WHATSAPP_NUMBER = "919320468886";
+
+function makeWhatsAppText(values: { name: string; need: string; message: string }) {
+  const lines = [
+    "Hi Phoenix India,",
+    "I just submitted an enquiry on your website.",
+    "",
+    `Name: ${values.name.trim()}`,
+    values.need ? `Service: ${values.need}` : "",
+    values.message.trim() ? `Requirement: ${values.message.trim()}` : "",
+  ];
+  return lines.filter(Boolean).join("\n");
+}
+
 export function EnquiryForm() {
   const [sent, setSent] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
