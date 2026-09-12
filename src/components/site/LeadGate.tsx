@@ -248,9 +248,31 @@ function LeadGateModal({
             </p>
           )}
 
-          <button type="submit" disabled={saving || done} className="btn-flame w-full">
-            {done ? "Thank you — continuing…" : saving ? "Sending…" : "Submit & continue"}
-          </button>
+          {!done ? (
+            <button type="submit" disabled={saving} className="btn-flame w-full">
+              {saving ? "Sending…" : "Submit & continue"}
+            </button>
+          ) : (
+            <div className="space-y-3">
+              <p
+                role="status"
+                className="rounded-lg border border-ember/25 bg-ember/10 px-4 py-3 text-sm text-ember"
+              >
+                Thank you — your enquiry has been saved.
+              </p>
+              <a
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#25D366] px-4 py-3 font-medium text-white transition hover:bg-[#1ebe57]"
+              >
+                <span>Send to Phoenix India on WhatsApp</span>
+              </a>
+              <button type="button" onClick={onDone} className="btn-flame w-full">
+                Continue without WhatsApp
+              </button>
+            </div>
+          )}
         </form>
       </div>
     </div>
