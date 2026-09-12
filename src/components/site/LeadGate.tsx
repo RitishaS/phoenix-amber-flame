@@ -87,6 +87,21 @@ export function LeadGateProvider({ children }: { children: ReactNode }) {
 
 }
 
+const WHATSAPP_NUMBER = "919320468886";
+
+function makeWhatsAppText(values: { name: string; email: string; service: string; message: string }) {
+  const lines = [
+    "Hi Phoenix India,",
+    "I just submitted an enquiry on your website.",
+    "",
+    `Name: ${values.name.trim()}`,
+    values.service ? `Service: ${values.service}` : "",
+    values.email.trim() ? `Email: ${values.email.trim()}` : "",
+    values.message.trim() ? `Requirement: ${values.message.trim()}` : "",
+  ];
+  return lines.filter(Boolean).join("\n");
+}
+
 function LeadGateModal({
   source,
   onClose,
@@ -135,8 +150,9 @@ function LeadGateModal({
       return;
     }
     setDone(true);
-    setTimeout(onDone, 900);
   };
+
+  const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(makeWhatsAppText(values))}`;
 
   return (
     <div
