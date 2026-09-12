@@ -1,6 +1,20 @@
 import { useState, type FormEvent } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
+const WHATSAPP_NUMBER = "919320468886";
+
+function makeWhatsAppText(values: { name: string; need: string; message: string }) {
+  const lines = [
+    "Hi Phoenix India,",
+    "I just submitted an enquiry on your website.",
+    "",
+    `Name: ${values.name.trim()}`,
+    values.need ? `Service: ${values.need}` : "",
+    values.message.trim() ? `Requirement: ${values.message.trim()}` : "",
+  ];
+  return lines.filter(Boolean).join("\n");
+}
+
 export function EnquiryForm() {
   const [sent, setSent] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -30,6 +44,8 @@ export function EnquiryForm() {
 
   const field =
     "w-full rounded-lg border border-ink/15 bg-paper-2 px-4 py-3 text-ink placeholder:text-ink/40";
+
+  const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(makeWhatsAppText(values))}`;
 
   return (
     <div className="rounded-2xl border border-ink/10 bg-paper-2 p-6 shadow-[var(--shadow-card)] md:p-8">
@@ -80,17 +96,27 @@ export function EnquiryForm() {
           />
         </div>
 
-        <button type="submit" className="btn-flame w-full">
-          Send Enquiry
-        </button>
-
-        {sent && (
-          <p
-            role="status"
-            className="rounded-lg border border-ember/25 bg-ember/10 px-4 py-3 text-sm text-ember"
-          >
-            Thank you — your enquiry has been noted. We&apos;ll get back to you shortly.
-          </p>
+        {!sent ? (
+          <button type="submit" className="btn-flame w-full">
+            Send Enquiry
+          </button>
+        ) : (
+          <div className="space-y-3">
+            <p
+              role="status"
+              className="rounded-lg border border-ember/25 bg-ember/10 px-4 py-3 text-sm text-ember"
+            >
+              Thank you — your enquiry has been saved.
+            </p>
+            <a
+              href={whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#25D366] px-4 py-3 font-medium text-white transition hover:bg-[#1ebe57]"
+            >
+              <span>Send to Phoenix India on WhatsApp</span>
+            </a>
+          </div>
         )}
 
         {errors["form"] && (
@@ -99,9 +125,11 @@ export function EnquiryForm() {
           </p>
         )}
 
-        <p className="font-mono text-[0.7rem] leading-relaxed text-ink/50">
-          Note: enquiries are stored securely — email or WhatsApp forwarding can be connected later.
-        </p>
+        {!sent && (
+          <p className="font-mono text-[0.7rem] leading-relaxed text-ink/50">
+            Note: enquiries are stored securely — email or WhatsApp forwarding can be connected later.
+          </p>
+        )}
       </form>
     </div>
   );

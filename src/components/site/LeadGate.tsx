@@ -87,6 +87,21 @@ export function LeadGateProvider({ children }: { children: ReactNode }) {
 
 }
 
+const WHATSAPP_NUMBER = "919320468886";
+
+function makeWhatsAppText(values: { name: string; email: string; service: string; message: string }) {
+  const lines = [
+    "Hi Phoenix India,",
+    "I just submitted an enquiry on your website.",
+    "",
+    `Name: ${values.name.trim()}`,
+    values.service ? `Service: ${values.service}` : "",
+    values.email.trim() ? `Email: ${values.email.trim()}` : "",
+    values.message.trim() ? `Requirement: ${values.message.trim()}` : "",
+  ];
+  return lines.filter(Boolean).join("\n");
+}
+
 function LeadGateModal({
   source,
   onClose,
@@ -135,8 +150,9 @@ function LeadGateModal({
       return;
     }
     setDone(true);
-    setTimeout(onDone, 900);
   };
+
+  const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(makeWhatsAppText(values))}`;
 
   return (
     <div
@@ -232,9 +248,31 @@ function LeadGateModal({
             </p>
           )}
 
-          <button type="submit" disabled={saving || done} className="btn-flame w-full">
-            {done ? "Thank you — continuing…" : saving ? "Sending…" : "Submit & continue"}
-          </button>
+          {!done ? (
+            <button type="submit" disabled={saving} className="btn-flame w-full">
+              {saving ? "Sending…" : "Submit & continue"}
+            </button>
+          ) : (
+            <div className="space-y-3">
+              <p
+                role="status"
+                className="rounded-lg border border-ember/25 bg-ember/10 px-4 py-3 text-sm text-ember"
+              >
+                Thank you — your enquiry has been saved.
+              </p>
+              <a
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#25D366] px-4 py-3 font-medium text-white transition hover:bg-[#1ebe57]"
+              >
+                <span>Send to Phoenix India on WhatsApp</span>
+              </a>
+              <button type="button" onClick={onDone} className="btn-flame w-full">
+                Continue without WhatsApp
+              </button>
+            </div>
+          )}
         </form>
       </div>
     </div>
