@@ -316,10 +316,10 @@ function Index() {
               <div className="mt-8 overflow-hidden rounded-2xl border border-ink/10">
                 <iframe
                   title="Phoenix India office location on Google Maps"
-                  src="https://www.google.com/maps?q=Harihar%20Nook%20CHS%20Ltd%2C%20Kalyan-Murbad%20Road%2C%20Kalyan%20West%20421301&output=embed"
-                  className="h-72 w-full"
+                  src="https://maps.google.com/maps?q=Harihar%20Nook%20CHS%20Ltd%2C%20Kalyan-Murbad%20Road%2C%20Kalyan%20West%20421301&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                  className="h-72 w-full border-0"
                   loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
                 />
               </div>
             </Reveal>
