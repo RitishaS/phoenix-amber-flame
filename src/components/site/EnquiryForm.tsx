@@ -45,6 +45,8 @@ export function EnquiryForm() {
   const field =
     "w-full rounded-lg border border-ink/15 bg-paper-2 px-4 py-3 text-ink placeholder:text-ink/40";
 
+  const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(makeWhatsAppText(values))}`;
+
   return (
     <div className="rounded-2xl border border-ink/10 bg-paper-2 p-6 shadow-[var(--shadow-card)] md:p-8">
       <h3 className="font-display text-2xl text-ink">Send an enquiry</h3>
